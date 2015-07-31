@@ -3,8 +3,6 @@ module Finance
     
     self.abstract_class = true
     
-    self.primary_key = 'uuid'
-    
     before_create :generate_uuid
     
     def generate_uuid

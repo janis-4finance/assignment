@@ -1,0 +1,37 @@
+= form_for( @loan ) do |f|
+  %h2 Jauns aizņēmums
+  - if @loan.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@loan.errors.count, "error")
+        &nbsp;prohibited this loan from being saved:
+      %ul
+        - @loan.errors.full_messages.each do |message|
+          %li= message
+  .field
+    .label_wrap= f.label :principal
+    .input_wrap= f.number_field :principal
+  
+  .field
+    = f.label :apr
+    %br/
+    = f.text_field :apr
+  .field
+    = f.label :principal
+    %br/
+    = f.text_field :principal
+  .field
+    = f.label :interest
+    %br/
+    = f.text_field :interest
+  .field
+    = f.label :total
+    %br/
+    = f.text_field :total
+  .field
+    = f.label :maturity_date
+    %br/
+    = f.date_select :maturity_date
+  
+  .actions
+    = f.submit

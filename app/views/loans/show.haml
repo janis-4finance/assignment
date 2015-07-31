@@ -1,0 +1,49 @@
+%p#notice= notice
+%p
+  %strong User:
+  = @loan.user_id
+%p
+  %strong Apr:
+  = @loan.apr
+%p
+  %strong Principal:
+  = @loan.principal
+%p
+  %strong Interest:
+  = @loan.interest
+%p
+  %strong Total:
+  = @loan.total
+%p
+  %strong Original apr:
+  = @loan.original_apr
+%p
+  %strong Original interest:
+  = @loan.original_interest
+%p
+  %strong Submission date:
+  = @loan.submission_date
+%p
+  %strong Submission timestamp:
+  = @loan.submission_timestamp
+%p
+  %strong Approved:
+  = @loan.approved
+%p
+  %strong Disbursed:
+  = @loan.disbursed
+%p
+  %strong Repaid:
+  = @loan.repaid
+%p
+  %strong Maturity date:
+  = @loan.maturity_date
+%p
+  %strong User ip:
+  = @loan.user_ip
+%p
+  %strong Decline reason:
+  = @loan.decline_reason
+= link_to 'Edit', edit_loan_path(@loan)
+|
+= link_to 'Back', loans_path

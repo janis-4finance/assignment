@@ -1,0 +1,18 @@
+.container-fluid
+	- if @loans.count > 0
+		%table.history.table.table-striped
+			%thead
+				%tr
+					%th UUID
+					%th Principal
+					%th APR
+					%th Total
+			%tbody
+				- @loans.each do |loan|
+					- if !loan.new_record?
+						%tr
+							%td= loan.uuid
+							%td= loan.principal
+							%td= loan.apr
+							%td= loan.total
+	= render 'form'

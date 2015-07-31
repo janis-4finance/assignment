@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+#
+one:
+  user_id: MyString
+  apr: 9.99
+  principal: 9.99
+  interest: 9.99
+  total: 9.99
+  original_apr: 9.99
+  original_interest: 9.99
+  submission_date: 2015-07-31
+  submission_timestamp: 1
+  approved: false
+  disbursed: false
+  repaid: false
+  maturity_date: 2015-07-31
+  user_ip: MyString
+  decline_reason: MyString
+
+two:
+  user_id: MyString
+  apr: 9.99
+  principal: 9.99
+  interest: 9.99
+  total: 9.99
+  original_apr: 9.99
+  original_interest: 9.99
+  submission_date: 2015-07-31
+  submission_timestamp: 1
+  approved: false
+  disbursed: false
+  repaid: false
+  maturity_date: 2015-07-31
+  user_ip: MyString
+  decline_reason: MyString

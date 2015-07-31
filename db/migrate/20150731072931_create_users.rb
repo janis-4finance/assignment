@@ -1,7 +1,7 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users, id: false do |t|
-      t.string :uuid, :string, :primary_key => true, :limit => 36
+      t.string :uuid, :primary_key => true, :limit => 36
       t.string :name
       t.string :phone
       t.string :iban
