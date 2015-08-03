@@ -1,0 +1,6 @@
+%h2 Banklink, wait...
+
+= form_for( @loan, :url => repay_callback_loan_path( @loan ), :method => :post, :html => { :class => 'repay_callback' } ) do |f|
+  = f.submit
+
+  

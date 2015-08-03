@@ -1,20 +1,21 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_loan, only: [:show, :edit, :update, :destroy, :repay, :repay_callback]
 
   # GET /loans
   # GET /loans.json
   def index
-    user = User.first
-    if user.blank?
-      user = User.new
-      user.save( :validate => false )
+    @user = User.first
+    if @user.blank?
+      @user = User.new
+      @user.save( :validate => false )
     end
     
-    @loans = user.loans
+    @loans = @user.loans
     
-    @loan = user.loans.build
+    @loan = @user.loans.build
     @loan.principal = 300
     @loan.apr = 219.0
+    @loan.days = 30
     @loan.maturity_date = Date.today + 30.days
     @loan.interest = @loan.principal * @loan.apr / 100 / 365 * 30
     @loan.total = @loan.principal + @loan.interest
@@ -45,16 +46,27 @@ class LoansController < ApplicationController
   # POST /loans
   # POST /loans.json
   def create
+    
     user = User.first
     if user.blank?
       user = User.new
       user.save( :validate => false )
     end
-    @loan = user.loans.build(loan_params)
-
+    
+    @loan = user.loans.build
+    
+    @loan.assign_attributes( loan_params )
+    
+    @loan.apr = Loan::APR
+    if !@loan.days.blank? && !@loan.principal.blank?
+      @loan.maturity_date = Date.today + @loan.days.days
+      @loan.interest = @loan.principal * @loan.apr / 365 / 100 * @loan.days
+      @loan.total = @loan.principal + @loan.interest
+    end
+    
     respond_to do |format|
       if @loan.save
-        format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Loan was successfully created.' }
         format.json { render :show, status: :created, location: @loan }
       else
         format.html { render :new }
@@ -86,7 +98,24 @@ class LoansController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
+  # stub to simulate third party payment provider
+  def repay
+  end
+  
+  # stub to simulate third party payment provider
+  def repay_callback
+    respond_to do |format|
+      if @loan.update({ repaid: true })
+        format.html { redirect_to root_path, notice: 'Loan repaid.' }
+        format.json { render :show, status: :ok, location: @loan }
+      else
+        format.html { render :edit }
+        format.json { render json: @loan.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_loan
@@ -95,6 +124,6 @@ class LoansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loan_params
-      params.require(:loan).permit(:apr, :principal, :interest, :total, :original_apr, :original_interest, :submission_date, :submission_timestamp, :approved, :disbursed, :repaid, :maturity_date, :user_ip, :decline_reason)
+      params.require(:loan).permit(:apr, :principal, :days, :interest, :total, :original_apr, :original_interest, :submission_date, :submission_timestamp, :user_attributes => [ :name, :phone, :iban ] )
     end
 end

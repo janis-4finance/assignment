@@ -1,0 +1,30 @@
+.controller-loans .new_loan
+{
+	max-width: 400px;
+	border: 1px solid rgba(0,0,0,.05);
+	border-radius: 5px;
+	background-color: rgba(0,0,0,.05);
+	padding: 10px;
+	margin-bottom: 100px;
+}
+.controller-loans .new_loan .form-control.primary
+{
+	height: auto;
+	width: 100px;
+	display: inline-block;
+}
+.controller-loans .new_loan .form-control.primary,
+.controller-loans .new_loan .form-control.primary + span
+{
+	font-size: 2em;
+}
+.controller-loans .new_loan .calendar
+{
+	background-color: rgba(0,0,0,.05);
+	height: 200px;
+}
+.controller-loans .new_loan .submit
+{
+	width: 100%;
+	font-size: 1.5em;
+}

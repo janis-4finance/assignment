@@ -9,5 +9,10 @@ module Finance
       self.uuid = UUIDTools::UUID.random_create.to_s if self.uuid.blank?
     end
     
+    def self.primary_key
+      return "uuid" if connection.column_exists?( table_name, :uuid )
+      super
+    end
+    
   end
 end

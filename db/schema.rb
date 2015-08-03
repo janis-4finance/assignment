@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731092744) do
+ActiveRecord::Schema.define(version: 20150803124336) do
 
-  create_table "loans", id: false, force: :cascade do |t|
-    t.string   "uuid",                 limit: 36
+  create_table "loans", primary_key: "uuid", force: :cascade do |t|
     t.string   "user_id",              limit: 36
     t.decimal  "apr",                              precision: 8, scale: 4
     t.decimal  "principal",                        precision: 8, scale: 2
@@ -27,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150731092744) do
     t.boolean  "approved",                                                 default: false
     t.boolean  "disbursed",                                                default: false
     t.boolean  "repaid",                                                   default: false
+    t.integer  "days",                 limit: 4
     t.date     "maturity_date"
     t.string   "user_ip",              limit: 255
     t.string   "decline_reason",       limit: 255
@@ -34,8 +34,7 @@ ActiveRecord::Schema.define(version: 20150731092744) do
     t.datetime "updated_at",                                                               null: false
   end
 
-  create_table "users", id: false, force: :cascade do |t|
-    t.string   "uuid",       limit: 36
+  create_table "users", primary_key: "uuid", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "phone",      limit: 255
     t.string   "iban",       limit: 255

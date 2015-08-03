@@ -1,0 +1,8 @@
+%h2 Pašreizējais aizņēmums
+#{( loan.maturity_date - Date.today ).to_i} dienas līdz atmaksāšanai
+
+= form_for( loan, :url => repay_loan_path( loan ), :method => :post ) do |f|
+  = f.submit "repay #{loan.total} EUR"
+= form_for( loan ) do |f|
+  = f.submit :extend
+  

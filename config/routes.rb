@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  resources :loans
+  
+  resources :loans do
+    member do
+      post :repay
+      post :repay_callback
+    end
+  end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
