@@ -27,6 +27,11 @@ class LoansController < ApplicationController
   # GET /loans/1
   # GET /loans/1.json
   def show
+    # update disbursed state if the simulated wait period is over
+    # this would not be necessary in a production app
+    if @loan.approved && @loan.disburse_after <= DateTime.now
+      @loan.update_attribute( :disbursed, true )
+    end
   end
 
   # GET /loans/new
@@ -58,15 +63,25 @@ class LoansController < ApplicationController
     @loan.assign_attributes( loan_params )
     
     @loan.apr = Loan::APR
+    # should consider also request.env["HTTP_X_FORWARDED_FOR"] and request.env['REMOTE_ADDR'] for better protection
+    @loan.user_ip = request.remote_ip
+    
     if !@loan.days.blank? && !@loan.principal.blank?
       @loan.maturity_date = Date.today + @loan.days.days
       @loan.interest = @loan.principal * @loan.apr / 365 / 100 * @loan.days
       @loan.total = @loan.principal + @loan.interest
+      
+      @loan.approved = true
+    end
+    
+    # set timestamp to mark as disbursed at - this is a stub and should not exist in an actual app
+    if @loan.approved
+      @loan.disburse_after = DateTime.now + ( rand(90) + 30 ).seconds # after 30s to 120s
     end
     
     respond_to do |format|
       if @loan.save
-        format.html { redirect_to root_path, notice: 'Loan was successfully created.' }
+        format.html { redirect_to @loan }
         format.json { render :show, status: :created, location: @loan }
       else
         format.html { render :new }
@@ -107,7 +122,7 @@ class LoansController < ApplicationController
   def repay_callback
     respond_to do |format|
       if @loan.update({ repaid: true })
-        format.html { redirect_to root_path, notice: 'Loan repaid.' }
+        format.html { redirect_to root_path, notice: 'Aizdevums atmaksāts.' }
         format.json { render :show, status: :ok, location: @loan }
       else
         format.html { render :edit }
@@ -124,6 +139,6 @@ class LoansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loan_params
-      params.require(:loan).permit(:apr, :principal, :days, :interest, :total, :original_apr, :original_interest, :submission_date, :submission_timestamp, :user_attributes => [ :name, :phone, :iban ] )
+      params.require(:loan).permit( :principal, :days, :submission_date, :submission_timestamp, :user_attributes => [ :name, :phone, :iban ] )
     end
 end

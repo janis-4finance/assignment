@@ -5,6 +5,6 @@ class User < Finance::Base
 	validates :iban,  presence: true, uniqueness: true
 	
 	has_many :loans
-	has_one :outstanding_loan, lambda{ where( 'repaid=0' ) }, :class_name => 'Loan'
+	has_one :outstanding_loan, lambda{ where( 'repaid=0' ).where( 'approved=1' ) }, :class_name => 'Loan'
 	
 end

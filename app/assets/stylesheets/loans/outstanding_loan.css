@@ -1,0 +1,15 @@
+.controller-loans .outstanding_loan .time_remaining
+{
+	text-align: center;
+	margin-bottom: 30px;
+}
+.controller-loans .outstanding_loan .days
+{
+	font-size: 12em;
+	line-height: 90%;
+}
+.controller-loans .outstanding_loan .or
+{
+	text-align: center;
+	margin: 30px 0;
+}

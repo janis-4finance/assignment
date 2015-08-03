@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803124336) do
+ActiveRecord::Schema.define(version: 20150803165555) do
 
   create_table "loans", primary_key: "uuid", force: :cascade do |t|
     t.string   "user_id",              limit: 36
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150803124336) do
     t.string   "decline_reason",       limit: 255
     t.datetime "created_at",                                                               null: false
     t.datetime "updated_at",                                                               null: false
+    t.datetime "disburse_after"
   end
 
   create_table "users", primary_key: "uuid", force: :cascade do |t|

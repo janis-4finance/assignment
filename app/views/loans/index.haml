@@ -1,22 +1,26 @@
-- if !notice.blank?
-	.notice= notice
-- if @loans.count > 0
-	%table.history.table.table-striped
-		%thead
-			%tr
-				%th UUID
-				%th Principal
-				%th APR
-				%th Total
-		%tbody
-			- @loans.each do |loan|
-				- if !loan.new_record?
+.row
+	- if !notice.blank?
+		.notice.bg-success= notice
+	.col-sm-6
+		- if @user.outstanding_loan.blank?
+			= render 'form'
+		- else
+			= render 'current', :loan => @user.outstanding_loan
+	- if @loans.count > 0
+		.col-sm-6
+			%h2 Aizņēmumu vēsture
+			%table.history.table.table-striped
+				%thead
 					%tr
-						%td= loan.uuid
-						%td= loan.principal
-						%td= loan.apr
-						%td= loan.total
-- if @user.outstanding_loan.blank?
-	= render 'form'
-- else
-	= render 'current', :loan => @user.outstanding_loan
+						%th UUID
+						%th Principal
+						%th APR
+						%th Total
+				%tbody
+					- @loans.each do |loan|
+						- if !loan.new_record?
+							%tr
+								%td= loan.uuid
+								%td= loan.principal
+								%td= loan.apr
+								%td= loan.total
