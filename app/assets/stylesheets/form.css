@@ -66,3 +66,12 @@
 	display: inline-block;
 }
 
+@media all and (max-width: 400px)
+{
+	.loan_form .btn-link
+	{
+		padding-left: 3px;
+		padding-right: 3px;
+	}
+}
+

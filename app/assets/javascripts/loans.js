@@ -1,6 +1,6 @@
 //= require jquery-ui/datepicker
 
-jQuery(function()
+jQuery( document ).on( 'ready page:load', function()
 {
 	var controller = jQuery( '.controller-loans' );
 	

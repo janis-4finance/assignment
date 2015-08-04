@@ -4,11 +4,7 @@ class LoansController < ApplicationController
   # GET /loans
   # GET /loans.json
   def index
-    @user = User.first
-    if @user.blank?
-      @user = User.new
-      @user.save( :validate => false )
-    end
+    @user = current_user
     
     @loans = @user.loans
     
@@ -46,11 +42,7 @@ class LoansController < ApplicationController
 
   # GET /loans/new
   def new
-    user = User.first
-    if user.blank?
-      user = User.new
-      user.save( :validate => false )
-    end
+    user = current_user
     @loan = user.loans.build
   end
 
@@ -62,11 +54,7 @@ class LoansController < ApplicationController
   # POST /loans.json
   def create
     
-    user = User.first
-    if user.blank?
-      user = User.new
-      user.save( :validate => false )
-    end
+    user = current_user
     
     @loan = user.loans.build
     
@@ -80,14 +68,10 @@ class LoansController < ApplicationController
       @loan.maturity_date = Date.today + @loan.days.days
       @loan.interest = @loan.principal * @loan.apr / 365 / 100 * @loan.days
       @loan.total = @loan.principal + @loan.interest
-      
-      @loan.approved = true
     end
     
     # set timestamp to mark as disbursed at - this is a stub and should not exist in an actual app
-    if @loan.approved
-      @loan.disburse_after = DateTime.now + ( rand(90) + 30 ).seconds # after 30s to 120s
-    end
+    @loan.disburse_after = DateTime.now + ( rand(90) + 30 ).seconds # after 30s to 120s
     
     respond_to do |format|
       if @loan.save
@@ -117,11 +101,11 @@ class LoansController < ApplicationController
   # DELETE /loans/1
   # DELETE /loans/1.json
   def destroy
-    @loan.destroy
-    respond_to do |format|
-      format.html { redirect_to loans_url, notice: 'Loan was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    #@loan.destroy
+    #respond_to do |format|
+    #  format.html { redirect_to loans_url, notice: 'Loan was successfully destroyed.' }
+    #  format.json { head :no_content }
+    #end
   end
   
   # stub to simulate third party payment provider
@@ -145,6 +129,9 @@ class LoansController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_loan
       @loan = Loan.find(params[:id])
+      if @loan.user_id != current_user.uuid
+        render :status => :forbidden, :text => "Forbidden fruit"
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

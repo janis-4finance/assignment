@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804084624) do
+ActiveRecord::Schema.define(version: 20150804165050) do
 
   create_table "extensions", id: false, force: :cascade do |t|
     t.string   "uuid",       limit: 36
@@ -47,11 +47,18 @@ ActiveRecord::Schema.define(version: 20150804084624) do
   end
 
   create_table "users", primary_key: "uuid", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "phone",      limit: 255
-    t.string   "iban",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",                limit: 255
+    t.string   "phone",               limit: 255
+    t.string   "iban",                limit: 255
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",       limit: 4,   default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip",  limit: 255
+    t.string   "last_sign_in_ip",     limit: 255
+    t.string   "remember_token",      limit: 255
   end
 
   add_index "users", ["iban"], name: "index_users_on_iban", unique: true, using: :btree
