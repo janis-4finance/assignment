@@ -1,9 +1,9 @@
 .new_loan
-  = form_for( @loan, :html => { :class => 'loan_form' } ) do |f|
+  = form_for( @loan, :html => { :class => 'loan_form new_loan_form' } ) do |f|
     = f.hidden_field :interest
     = f.hidden_field :total
     = f.hidden_field :maturity_date
-    %h2 Jauns aizņēmums
+    %h2 New Loan
     - if @loan.errors.any?
       #error_explanation
         %h2
@@ -14,72 +14,79 @@
             %li= message
     .field
       .label_wrap
-        = f.label :principal, 'Cik vēlies aizņemties?'
+        = f.label :principal, 'How much do you need?'
         %span.presets
-          %button{ :type => "button", :name => "principal_preset", :value => 100, :class => "btn-link" } 100 eiro
-          %button{ :type => "button", :name => "principal_preset", :value => 200, :class => "btn-link" } 200 eiro
-          %button{ :type => "button", :name => "principal_preset", :value => 300, :class => "btn-link" } 300 eiro
+          - [ 100, 200, 300 ].each do |principal|
+            %button{ :type => "button", :name => "principal_preset", :value => principal, :class => "btn-link" } €#{principal}
       .input_wrap
         = f.number_field :principal, :class => 'form-control primary'
-        %span &nbsp;eiro
+        %span &nbsp;EUR
         .info
-          Kopā būs jāatmaksā
-          .value 354 eiro
+          Total amount to repay
+          .total
+            €
+            %span.value 354
     .field
       .label_wrap
-        = f.label :days, 'Uz cik ilgu laiku?'
+        = f.label :days, 'For how long?'
         %span.presets
-          %button{ :type => "button", :name => "duration_preset", :value => 7, :class => "btn-link" } 7 dienas
-          %button{ :type => "button", :name => "duration_preset", :value => 14, :class => "btn-link" } 14 dienas
-          %button{ :type => "button", :name => "duration_preset", :value => 30, :class => "btn-link" } 30 dienas
+          - [ 7, 14, 30 ].each do |days|
+            %button{ :type => "button", :name => "duration_preset", :value => days, :class => "btn-link" } #{days} days
       .input_wrap
         = f.number_field :days, :class => 'form-control primary'
-        %span &nbsp;dienas
+        %span &nbsp;days
         .info
-          Aizņēmums būs jāatmaksā
-          .value 2. septembrī
+          Date of repayment
+          .value.maturity_date= @loan.maturity_date.strftime( "%d.%m.%Y" )
     .repayment
       .calendar
     = f.fields_for :user do |ff|
       = ff.hidden_field :uuid
       .field
         .label_wrap
-          = ff.label :name, 'Vārds'
+          = ff.label :name, 'Name'
         .input_wrap
           = ff.text_field :name, :class => 'form-control'
       .field
         .label_wrap
-          = ff.label :phone, 'Telefons'
+          = ff.label :phone, 'Phone number'
         .input_wrap
           = ff.text_field :phone, :class => 'form-control'
       .field
         .label_wrap
-          = ff.label :iban, 'Bankas konta numurs (IBAN)'
+          = ff.label :iban, 'Bank account number (IBAN)'
         .input_wrap
           = ff.text_field :iban, :class => 'form-control'
     .actions
-      = f.submit 'Saņemt naudu', :class => 'btn btn-primary submit'
+      = f.submit 'Receive money', :class => 'btn btn-primary submit'
     .summary
-      .line.maturity_date
-        .name Atmaksāšanas datums:
-        .value 2. septembris, 2015
+      .line.maturity_date_line
+        .name Date of repayment:
+        .value_wrap.maturity_date= @loan.maturity_date.strftime( "%d.%m.%Y" )
       .line
-        .name Kredīts:
-        .value 300.00 eiro
+        .name Loan:
+        .value_wrap
+          €
+          %span.principal 300.00
       .line
-        .name Komisija:
-        .value 54.50 eiro
+        .name Comission:
+        .value_wrap
+          €
+          %span.interest 54.50
       .line
-        .name Kopā:
-        .value 354.40 eiro
-      .extension_title Termiņa pagarināšana
+        .name Total:
+        .value_wrap
+          %span.total
+            €
+            %span.value 354.40
+      .extension_title Loan Extension
       .line
-        .name 7 dienas:
-        .value 30.00 eiro
+        .name 7 days:
+        .value_wrap €30.00
       .line
-        .name 14 dienas:
-        .value 40.00 eiro
+        .name 14 days:
+        .value_wrap €40.00
       .line
-        .name 30 dienas:
-        .value 55.00 eiro
+        .name 30 days:
+        .value_wrap €55.00
     

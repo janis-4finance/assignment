@@ -30,12 +30,12 @@
 	font-size: .85em;
 	line-height: 1.5em;
 }
-.loan_form .summary .maturity_date
+.loan_form .summary .maturity_date_line
 {
 	margin-bottom: 10px;
 }
 .loan_form .summary .name,
-.loan_form .summary .value
+.loan_form .summary .value_wrap
 {
 	display: inline-block;
 	width: 50%;
@@ -65,3 +65,4 @@
 {
 	display: inline-block;
 }
+
