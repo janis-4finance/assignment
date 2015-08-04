@@ -24,6 +24,14 @@ class LoansController < ApplicationController
       @extension = @user.outstanding_loan.extensions.build( :days => 7 )
     end
     
+    respond_to do |format|
+      format.html
+      format.json do
+        json = { 'Loan' => @loans }
+        render :json => json, :layout => false
+      end
+    end
+    
   end
 
   # GET /loans/1

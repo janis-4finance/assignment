@@ -10,3 +10,4 @@
 	%body
 		.controller{ 'class' => "container-fluid controller-#{params[:controller]} view-#{params[:action]}" }
 			= yield
+			= link_to 'Home', root_path, :class => 'home'

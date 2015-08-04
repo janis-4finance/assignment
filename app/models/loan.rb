@@ -14,4 +14,18 @@ class Loan < Finance::Base
 		return (maturity_date - Date.today).to_i
 	end
 	
+	def get_extension_apr
+		return self.apr * 1.5
+	end
+	
+	def get_extension_cost( no_of_days )
+		return principal * get_extension_apr / 365 / 100 * no_of_days
+	end
+	
+	def as_json( options = nil )
+		json = super( options )
+		json.delete( 'decline_reason' )
+		return json
+	end
+	
 end

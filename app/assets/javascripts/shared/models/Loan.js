@@ -59,5 +59,24 @@
 		var self = this;
 		return self.principal + self.get_interest();
 	}
+	
+	/*
+	 * get_extension_cost()
+	 */
+	Finance[ class_name ].prototype.get_extension_cost = function( no_of_days )
+	{
+		var self = this;
+		return self.principal * self.apr * 1.5 / 365 / 100 * no_of_days;
+	}
+	
+	// normalize number fields on load - Rails sends BigDecimal as string
+	Finance[ class_name ].on( 'load', function()
+	{
+		var self = this;
+		[ 'apr', 'principal', 'interest', 'total' ].foreach(function( property )
+		{
+			self[property] = self[property] * 1 || 0;
+		});
+	});
 
 })();

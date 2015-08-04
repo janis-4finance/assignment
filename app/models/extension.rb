@@ -7,8 +7,8 @@ class Extension < Finance::Base
 	before_create do
 		if !loan.blank?
 			# set own properties
-			self.apr = loan.apr * 1.5
-			self.interest = loan.principal * self.apr / 365 / 100 * self.days
+			self.apr = loan.get_extension_apr
+			self.interest = loan.get_extension_cost( self.days )
 			self.total = loan.total + self.interest
 		end
   end
@@ -19,6 +19,14 @@ class Extension < Finance::Base
 		loan.total = self.total
 		loan.apr = self.apr
 		loan.save
+	end
+	
+	def get_total
+		return loan.total + loan.get_extension_cost( self.days )
+	end
+	
+	def maturity_date
+		return self.loan.maturity_date + self.days.days
 	end
 	
 end

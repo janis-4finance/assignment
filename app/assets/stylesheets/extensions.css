@@ -3,3 +3,13 @@
     max-width: 900px;
     padding-top: 30px;
 }
+.new_extension .repayment
+{
+	margin-bottom: 10px;
+	font-size: 1.5em;
+	line-height: 1.2em;
+}
+.new_extension .repayment .total_wrap
+{
+	font-weight: bold;
+}

@@ -1,33 +1,46 @@
-= form_for( [ @extension.loan, @extension ], :html => { :class => "loan_form new_extension" } ) do |f|
+= form_for( [ @extension.loan, @extension ], :html => { :class => "loan_form new_extension", 'data-loan_id' => @extension.loan.uuid } ) do |f|
 	.extend
 		.field
 			.label_wrap
 				= f.label :days, "Extend by:"
 				%span.presets
-					%button{ :type => "button", :name => "duration_preset", :value => 7,  :class => "btn-link" } 7 days
-					%button{ :type => "button", :name => "duration_preset", :value => 14, :class => "btn-link" } 14 days
-					%button{ :type => "button", :name => "duration_preset", :value => 30, :class => "btn-link" } 30 days
+					- [ 7, 14, 30 ].each do |no_of_days|
+						%button{ :type => "button", :name => "duration_preset", :value => no_of_days,  :class => "btn-link" } #{no_of_days} days
 			.input_wrap
 				= f.number_field :days, :class => "form-control primary"
 				%span &nbsp;days
 				.info
 					Loan will need to be repaid by
-					.value September 2
+					.maturity_date= @extension.maturity_date.strftime( "%d.%m.%Y" )
 		.repayment
-			Total: 354.00 euro
+			Total:&nbsp;
+			%span.total_wrap
+				€
+				%span.new_total= number_with_precision(@extension.get_total, precision:2) 
 		.calendar
 		.actions= f.submit "Extend loan", :class => "btn btn-danger submit"
 		.summary
-			.line.maturity_date
-				.name Atmaksāšanas datums:
-				.value 2. septembris, 2015
+			.line.maturity_date_line
+				.name Date of repayment:
+				.value_wrap.maturity_date= @extension.maturity_date.strftime( "%d.%m.%Y" )
 			.line
-				.name Kredīts:
-				.value 300.00 eiro
+				.name Initial loan:
+				.value_wrap
+					€
+					%span.value= number_with_precision(@extension.loan.principal, precision:2)
 			.line
-				.name Komisija:
-				.value 54.50 eiro
+				.name Commission accrued so far:
+				.value_wrap
+					€
+					%span.interest= number_with_precision(@extension.loan.interest, precision:2)
 			.line
-				.name Kopā:
-				.value 354.40 eiro
+				.name Cost of extension:
+				.value_wrap
+					€
+					%span.extension_cost= number_with_precision(@extension.loan.get_extension_cost( @extension.days ), precision:2)
+			.line
+				.name New total:
+				.value_wrap
+					€
+					%span.new_total= number_with_precision(@extension.get_total, precision:2)
 			

@@ -17,7 +17,7 @@ jQuery(function()
 		// create new Loan entry
 		var loan = new Finance.Loan();
 		
-		// validate inputs before assignment - this only has to make shure calculations are possible,
+		// validate inputs before assignment - this only has to make sure calculations are possible,
 		// server may perform additional validations
 		var read_from_inputs = function()
 		{
@@ -59,7 +59,7 @@ jQuery(function()
 			maxDate:     30,  // up to 30 days
 			defaultDate: 30
 		};
-		var datepicker = controller.find( '.calendar' ).datepicker( options );
+		var datepicker = form.find( '.calendar' ).datepicker( options );
 		
 		datepicker.datepicker( 'option', 'onSelect', function( date_string )
 		{
@@ -101,6 +101,11 @@ jQuery(function()
 				form.find( '.principal' ).html( loan.principal.toFixed(2) );
 				form.find( '.interest' ).html( loan.get_interest().toFixed(2) );
 				form.find( '.total .value' ).html( loan.get_total().toFixed(2) );
+				form.find( '.summary .line[data-no_of_days]' ).each(function( item )
+				{
+					var node = jQuery( this );
+					node.find( '.value' ).html( loan.get_extension_cost( node.attr( 'data-no_of_days' ) * 1 ).toFixed(2) );
+				});
 			}
 			
 		});

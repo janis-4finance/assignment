@@ -8,14 +8,14 @@
 			= render 'current', :loan => @user.outstanding_loan
 	- if @loans.count > 0
 		.col-sm-6
-			%h2= t 'loan_history'
+			%h2 Loan History
 			%table.history.table.table-striped
 				%thead
 					%tr
-						%th= t 'issue_date'
-						%th= t 'principal'
-						%th= t 'total'
-						%th= t 'status'
+						%th Date
+						%th Principal
+						%th Total
+						%th Status
 				%tbody
 					- @loans.each do |loan|
 						- if !loan.new_record?
@@ -26,19 +26,19 @@
 								%td
 									- if loan.disbursed
 										- if loan.repaid
-											= t 'repaid'
+											Repaid
 										- else
 											- if loan.days_remaining < 0
-												= t 'past_due'
+												Past due
 											- elsif loan.days_remaining == 0
-												= t 'due_today'
+												Due today
 											- elsif loan.days_remaining == 1
-												= t 'due_tomorrow'
+												Due tomorrow
 											- elsif loan.days_remaining > 1
-												= t 'due_in', :days => loan.days_remaining
+												Due in #{loan.days_remaining} days
 									- else
 										- if loan.approved
-											= t 'payment_in_progress'
+											Payment in progress
 										- else
-											= t 'declined'
+											Declined
 									

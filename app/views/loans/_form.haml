@@ -25,7 +25,7 @@
           Total amount to repay
           .total
             €
-            %span.value 354
+            %span.value= number_with_precision(@loan.total, precision:2)
     .field
       .label_wrap
         = f.label :days, 'For how long?'
@@ -67,26 +67,24 @@
         .name Loan:
         .value_wrap
           €
-          %span.principal 300.00
+          %span.principal= number_with_precision(@loan.principal, precision:2)
       .line
         .name Comission:
         .value_wrap
           €
-          %span.interest 54.50
+          %span.interest= number_with_precision(@loan.interest, precision:2)
       .line
         .name Total:
         .value_wrap
           %span.total
             €
-            %span.value 354.40
+            %span.value= number_with_precision(@loan.total, precision:2)
       .extension_title Loan Extension
-      .line
-        .name 7 days:
-        .value_wrap €30.00
-      .line
-        .name 14 days:
-        .value_wrap €40.00
-      .line
-        .name 30 days:
-        .value_wrap €55.00
+      - [ 7, 14, 30 ].each do |days|
+        .line{ 'data-no_of_days' => days }
+          .name #{days} days:
+          .value_wrap
+            €
+            %span.value= @loan.get_extension_cost( days )
+      
     

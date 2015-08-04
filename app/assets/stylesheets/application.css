@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+
+a.home
+{
+	margin-bottom: 100px;
+	display: inline-block;
+}
