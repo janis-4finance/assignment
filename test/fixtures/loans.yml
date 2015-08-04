@@ -2,19 +2,15 @@
 #
 one:
   user_id: MyString
-  apr: 9.99
-  principal: 9.99
-  interest: 9.99
-  total: 9.99
-  original_apr: 9.99
-  original_interest: 9.99
-  submission_date: 2015-07-31
-  submission_timestamp: 1
-  approved: false
-  disbursed: false
+  apr: 219.0
+  principal: 300.0
+  interest: 54.0
+  total: 354.0
+  approved: true
+  disbursed: true
   repaid: false
   maturity_date: 2015-07-31
-  user_ip: MyString
+  user_ip: 127.0.0.1
   decline_reason: MyString
 
 two:

@@ -1,8 +1,5 @@
 .new_loan
   = form_for( @loan, :html => { :class => 'loan_form new_loan_form' } ) do |f|
-    = f.hidden_field :interest
-    = f.hidden_field :total
-    = f.hidden_field :maturity_date
     %h2 New Loan
     - if @loan.errors.any?
       #error_explanation

@@ -19,11 +19,11 @@
 				%tbody
 					- @loans.each do |loan|
 						- if !loan.new_record?
-							%tr
+							%tr{ 'data-id' => loan.uuid }
 								%td= loan.created_at
 								%td= loan.principal
 								%td= loan.total
-								%td
+								%td.status
 									- if loan.disbursed
 										- if loan.repaid
 											Repaid
