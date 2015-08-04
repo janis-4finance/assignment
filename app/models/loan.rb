@@ -10,6 +10,21 @@ class Loan < Finance::Base
 	
 	has_many :extensions
 	
+	# assess riskiness
+	before_create do
+		self.approved = true
+		# reject if user attemts to take out a max loan between 00:00 and 06:00 at night
+		if principal == user.max_amount && Time.now.seconds_since_midnight < 6 * 60 * 60
+			self.approved = false
+			self.decline_reason = 'Max amount in night'
+		end
+		# reject if too many applications originate from the same IP address
+		if Loan.where( :user_ip => self.user_ip, :created_at => (DateTime.now - 1.day)..DateTime.now ).count >= 3
+			self.approved = false
+			self.decline_reason = 'Too many applications from one IP address'
+		end
+	end
+	
 	def days_remaining
 		return (maturity_date - Date.today).to_i
 	end

@@ -14,7 +14,7 @@ class LoansController < ApplicationController
     
     @loan = @user.loans.build
     @loan.principal = 300
-    @loan.apr = 219.0
+    @loan.apr = Loan::APR
     @loan.days = 30
     @loan.maturity_date = Date.today + 30.days
     @loan.interest = @loan.principal * @loan.apr / 100 / 365 * 30
