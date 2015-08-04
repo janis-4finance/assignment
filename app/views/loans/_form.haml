@@ -22,6 +22,9 @@
       .input_wrap
         = f.number_field :principal, :class => 'form-control primary'
         %span &nbsp;eiro
+        .info
+          Kopā būs jāatmaksā
+          .value 354 eiro
     .field
       .label_wrap
         = f.label :days, 'Uz cik ilgu laiku?'
@@ -32,8 +35,10 @@
       .input_wrap
         = f.number_field :days, :class => 'form-control primary'
         %span &nbsp;dienas
+        .info
+          Aizņēmums būs jāatmaksā
+          .value 2. septembrī
     .repayment
-      Aizņēmums būs jāatmaksā 2. septembrī, kopējā summa 354 eiro
       .calendar
     = f.fields_for :user do |ff|
       = ff.hidden_field :uuid

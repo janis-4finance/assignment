@@ -20,8 +20,10 @@ class LoansController < ApplicationController
     @loan.interest = @loan.principal * @loan.apr / 100 / 365 * 30
     @loan.total = @loan.principal + @loan.interest
     
-    p '-------'
-    p @loan.user_id
+    if !@user.outstanding_loan.blank?
+      @extension = @user.outstanding_loan.extensions.build( :days => 7 )
+    end
+    
   end
 
   # GET /loans/1
@@ -122,7 +124,7 @@ class LoansController < ApplicationController
   def repay_callback
     respond_to do |format|
       if @loan.update({ repaid: true })
-        format.html { redirect_to root_path, notice: 'Aizdevums atmaksāts.' }
+        format.html { redirect_to root_path, notice: 'Loan repaid.' }
         format.json { render :show, status: :ok, location: @loan }
       else
         format.html { render :edit }
@@ -139,6 +141,6 @@ class LoansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def loan_params
-      params.require(:loan).permit( :principal, :days, :submission_date, :submission_timestamp, :user_attributes => [ :name, :phone, :iban ] )
+      params.require(:loan).permit( :principal, :days, :submission_date, :submission_timestamp, :extend_by_days, :user_attributes => [ :name, :phone, :iban ] )
     end
 end

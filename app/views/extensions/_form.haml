@@ -1,0 +1,33 @@
+= form_for( [ @extension.loan, @extension ] ) do |f|
+	.extend
+		.field
+			.label_wrap
+				= f.label :days, "Extend by:"
+				%span.presets
+					%button{ :type => "button", :name => "duration_preset", :value => 7,  :class => "btn-link" } 7 days
+					%button{ :type => "button", :name => "duration_preset", :value => 14, :class => "btn-link" } 14 days
+					%button{ :type => "button", :name => "duration_preset", :value => 30, :class => "btn-link" } 30 days
+			.input_wrap
+				= f.number_field :days, :class => "form-control primary"
+				%span &nbsp;days
+				.info
+					Loan will need to be repaid by
+					.value September 2
+		.repayment
+			Total: 354.00 euro
+		.calendar
+		.actions= f.submit "Extend loan", :class => "btn btn-danger submit"
+		.summary
+			.line.maturity_date
+				.name Atmaksāšanas datums:
+				.value 2. septembris, 2015
+			.line
+				.name Kredīts:
+				.value 300.00 eiro
+			.line
+				.name Komisija:
+				.value 54.50 eiro
+			.line
+				.name Kopā:
+				.value 354.40 eiro
+			

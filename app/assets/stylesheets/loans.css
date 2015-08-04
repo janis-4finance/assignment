@@ -1,5 +1,6 @@
 /*
- * require_tree ./loans/
+ *= require jquery-ui/datepicker
+ *= require_tree ./loans/
  */
 .controller-loans
 {
@@ -15,7 +16,8 @@
 	line-height: 1.2em;
 }
 .controller-loans .new_loan,
-.controller-loans .outstanding_loan
+.controller-loans .outstanding_loan,
+.controller-extensions .outstanding_loan
 {
 	border: 1px solid rgba(0,0,0,.05);
 	border-radius: 5px;
@@ -24,21 +26,27 @@
 	margin: 0 auto 100px;
 	max-width: 420px;
 }
-.controller-loans .form-control.primary
+.form-control.primary
 {
 	height: auto;
 	width: 100px;
 	display: inline-block;
 }
-.controller-loans .form-control.primary,
-.controller-loans .form-control.primary + span
+.form-control.primary,
+.form-control.primary + span
 {
 	font-size: 2em;
 }
-.controller-loans .calendar
+.controller-loans .calendar,
+.controller-extensions .calendar
 {
 	background-color: rgba(0,0,0,.05);
-	height: 200px;
+	min-height: 200px;
+	margin-bottom: 10px;
+}
+.controller-loans .calendar .ui-datepicker
+{
+	width: 100%;
 }
 .controller-loans .submit
 {
@@ -73,4 +81,12 @@
 	text-align: center;
 	margin-top: 10px;
 }
-
+.controller-loans .field .info
+{
+	width: 45%;
+	float: right;
+	font-size: .9em;
+	line-height: 1.2em;
+	color: gray;
+	padding-top: 14px;
+}

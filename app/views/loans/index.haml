@@ -8,19 +8,37 @@
 			= render 'current', :loan => @user.outstanding_loan
 	- if @loans.count > 0
 		.col-sm-6
-			%h2 Aizņēmumu vēsture
+			%h2= t 'loan_history'
 			%table.history.table.table-striped
 				%thead
 					%tr
-						%th UUID
-						%th Principal
-						%th APR
-						%th Total
+						%th= t 'issue_date'
+						%th= t 'principal'
+						%th= t 'total'
+						%th= t 'status'
 				%tbody
 					- @loans.each do |loan|
 						- if !loan.new_record?
 							%tr
-								%td= loan.uuid
+								%td= loan.created_at
 								%td= loan.principal
-								%td= loan.apr
 								%td= loan.total
+								%td
+									- if loan.disbursed
+										- if loan.repaid
+											= t 'repaid'
+										- else
+											- if loan.days_remaining < 0
+												= t 'past_due'
+											- elsif loan.days_remaining == 0
+												= t 'due_today'
+											- elsif loan.days_remaining == 1
+												= t 'due_tomorrow'
+											- elsif loan.days_remaining > 1
+												= t 'due_in', :days => loan.days_remaining
+									- else
+										- if loan.approved
+											= t 'payment_in_progress'
+										- else
+											= t 'declined'
+									

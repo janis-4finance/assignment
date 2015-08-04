@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803165555) do
+ActiveRecord::Schema.define(version: 20150804084624) do
+
+  create_table "extensions", id: false, force: :cascade do |t|
+    t.string   "uuid",       limit: 36
+    t.string   "loan_id",    limit: 36
+    t.integer  "days",       limit: 4
+    t.decimal  "apr",                   precision: 8, scale: 4
+    t.decimal  "interest",              precision: 8, scale: 2
+    t.decimal  "total",                 precision: 8, scale: 2
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+  end
 
   create_table "loans", primary_key: "uuid", force: :cascade do |t|
     t.string   "user_id",              limit: 36

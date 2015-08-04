@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     member do
       post :repay
       post :repay_callback
+      post :extend
     end
+    resources :extensions, shallow: true
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
