@@ -1,5 +1,5 @@
 .new_loan
-  = form_for( @loan, :html => { :class => '' } ) do |f|
+  = form_for( @loan, :html => { :class => 'loan_form' } ) do |f|
     = f.hidden_field :interest
     = f.hidden_field :total
     = f.hidden_field :maturity_date

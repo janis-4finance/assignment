@@ -1,6 +1,6 @@
-%h2 Banklink, wait...
+.notice.bg-info Simulated third party payment step
 
-= form_for( @loan, :url => repay_callback_loan_path( @loan ), :method => :post, :html => { :class => 'repay_callback' } ) do |f|
-  = f.submit
+= form_for( @loan, :url => repay_callback_loan_path( @loan ), :method => :post, :html => { :class => 'loan_form repay_callback' } ) do |f|
+  = f.submit 'Yes, I made the payment', :class => 'btn btn-primary submit'
 
   

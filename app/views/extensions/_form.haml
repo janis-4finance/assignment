@@ -1,4 +1,4 @@
-= form_for( [ @extension.loan, @extension ] ) do |f|
+= form_for( [ @extension.loan, @extension ], :html => { :class => "loan_form new_extension" } ) do |f|
 	.extend
 		.field
 			.label_wrap

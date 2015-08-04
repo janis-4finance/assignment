@@ -4,7 +4,7 @@
     .days= ( loan.maturity_date - Date.today ).to_i
     days until repayment
   
-  = form_for( loan, :url => repay_loan_path( loan ), :method => :post ) do |f|
+  = form_for( loan, :url => repay_loan_path( loan ), :method => :post, :html => { :class => "loan_form" } ) do |f|
     = f.submit "Pay #{loan.total} EUR", :class => "btn btn-primary submit"
   .or vai
   = render 'extensions/form'

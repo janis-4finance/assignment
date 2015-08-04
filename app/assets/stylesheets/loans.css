@@ -16,8 +16,7 @@
 	line-height: 1.2em;
 }
 .controller-loans .new_loan,
-.controller-loans .outstanding_loan,
-.controller-extensions .outstanding_loan
+.outstanding_loan
 {
 	border: 1px solid rgba(0,0,0,.05);
 	border-radius: 5px;
@@ -26,67 +25,9 @@
 	margin: 0 auto 100px;
 	max-width: 420px;
 }
-.form-control.primary
-{
-	height: auto;
-	width: 100px;
-	display: inline-block;
-}
-.form-control.primary,
-.form-control.primary + span
-{
-	font-size: 2em;
-}
-.controller-loans .calendar,
-.controller-extensions .calendar
-{
-	background-color: rgba(0,0,0,.05);
-	min-height: 200px;
-	margin-bottom: 10px;
-}
-.controller-loans .calendar .ui-datepicker
-{
-	width: 100%;
-}
-.controller-loans .submit
-{
-	width: 100%;
-	font-size: 1.5em;
-}
 
-.controller-loans .summary
+.controller-loans .repay_callback
 {
-	font-size: .85em;
-	line-height: 1.5em;
-}
-.controller-loans .summary .maturity_date
-{
-	margin-bottom: 10px;
-}
-.controller-loans .summary .name,
-.controller-loans .summary .value
-{
-	display: inline-block;
-	width: 50%;
-	padding: 0 5px;
-	box-sizing: border-box;
-}
-.controller-loans .summary .name
-{
-	text-align: right;
-}
-.controller-loans .summary .extension_title
-{
-	font-weight: bold;
-	text-align: center;
-	margin-top: 10px;
-}
-.controller-loans .field .info
-{
-	width: 45%;
-	float: right;
-	font-size: .9em;
-	line-height: 1.2em;
-	color: gray;
-	padding-top: 14px;
+	max-width: 400px;
+	margin: 0 auto;
 }

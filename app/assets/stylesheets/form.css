@@ -1,0 +1,67 @@
+.loan_form .form-control.primary
+{
+	height: auto;
+	width: 100px;
+	display: inline-block;
+}
+.loan_form .form-control.primary,
+.loan_form .form-control.primary + span
+{
+	font-size: 2em;
+}
+.loan_form .calendar
+{
+	background-color: rgba(0,0,0,.05);
+	min-height: 200px;
+	margin-bottom: 10px;
+}
+.loan_form .calendar .ui-datepicker
+{
+	width: 100%;
+}
+.loan_form .submit
+{
+	width: 100%;
+	font-size: 1.5em;
+}
+
+.loan_form .summary
+{
+	font-size: .85em;
+	line-height: 1.5em;
+}
+.loan_form .summary .maturity_date
+{
+	margin-bottom: 10px;
+}
+.loan_form .summary .name,
+.loan_form .summary .value
+{
+	display: inline-block;
+	width: 50%;
+	padding: 0 5px;
+	box-sizing: border-box;
+}
+.loan_form .summary .name
+{
+	text-align: right;
+}
+.loan_form .summary .extension_title
+{
+	font-weight: bold;
+	text-align: center;
+	margin-top: 10px;
+}
+.loan_form .field .info
+{
+	width: 45%;
+	float: right;
+	font-size: .9em;
+	line-height: 1.2em;
+	color: gray;
+	padding-top: 14px;
+}
+.loan_form .field_with_errors
+{
+	display: inline-block;
+}
