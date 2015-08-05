@@ -31,3 +31,17 @@
 	max-width: 400px;
 	margin: 0 auto;
 }
+.controller-loans .history .status
+{
+	white-space: nowrap;
+}
+.controller-loans .history .extension td:first-child
+{
+	padding-left: 20px;
+}
+.controller-loans .history .extension td
+{
+	font-size: .9em;
+	color: gray;
+	line-height: 1.2em;
+}

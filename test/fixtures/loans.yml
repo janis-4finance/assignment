@@ -19,10 +19,6 @@ two:
   principal: 9.99
   interest: 9.99
   total: 9.99
-  original_apr: 9.99
-  original_interest: 9.99
-  submission_date: 2015-07-31
-  submission_timestamp: 1
   approved: false
   disbursed: false
   repaid: false

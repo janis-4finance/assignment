@@ -1,6 +1,6 @@
 class LoansController < ApplicationController
   before_action :set_loan, only: [:show, :edit, :update, :destroy, :repay, :repay_callback]
-
+  
   # GET /loans
   # GET /loans.json
   def index

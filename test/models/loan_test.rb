@@ -7,19 +7,16 @@ class LoanTest < ActiveSupport::TestCase
 	end
   test "valid item should be created" do
 		loan = Loan.new
-		user = User.new
-		user.save( :validate => false )
+		user = User.new( :name => "John", :phone => "12345678", :iban => "LV80BANK0000435195001" )
+		user.save
 		loan.user = user
 		loan.apr = 219.0
 		loan.principal = 300.0
 		loan.interest = 30.0
 		loan.total = loan.principal + loan.interest
-		loan.original_apr = loan.apr
-		loan.original_interest = loan.interest
-		loan.submission_date = Date.today
-		loan.submission_timestamp = DateTime.now.to_i
-		loan.maturity_date = loan.submission_date + 30.days
+		loan.days = 30
+		loan.maturity_date = Date.today + 30.days
 		loan.user_ip = "127.0.0.1"
-		assert loan.save
+		assert loan.save, loan.errors.inspect
 	end
 end

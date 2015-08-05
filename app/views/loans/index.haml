@@ -20,9 +20,9 @@
 					- @loans.each do |loan|
 						- if !loan.new_record?
 							%tr{ 'data-id' => loan.uuid }
-								%td= loan.created_at
-								%td= loan.principal
-								%td= loan.total
+								%td= loan.created_at.strftime("%d.%m.%Y %H:%M")
+								%td €#{number_with_precision(loan.principal, precision:2)}
+								%td €#{number_with_precision(loan.total, precision:2)}
 								%td.status
 									- if loan.disbursed
 										- if loan.repaid
@@ -41,4 +41,9 @@
 											Payment in progress
 										- else
 											Declined
-									
+							- if loan.extensions.count > 0
+								- loan.extensions.each do |extension|
+									%tr.extension
+										%td= extension.created_at.strftime("%d.%m.%Y %H:%M")
+										%td{ :colspan => 2 } #{extension.days} day extension
+										%td +€#{number_with_precision(extension.interest, precision:2)}

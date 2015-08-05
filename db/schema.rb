@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804201154) do
+ActiveRecord::Schema.define(version: 20150805184817) do
 
   create_table "extensions", id: false, force: :cascade do |t|
     t.string   "uuid",       limit: 36
@@ -25,25 +25,21 @@ ActiveRecord::Schema.define(version: 20150804201154) do
   end
 
   create_table "loans", id: false, force: :cascade do |t|
-    t.string   "uuid",                 limit: 36
-    t.string   "user_id",              limit: 36
-    t.decimal  "apr",                              precision: 8, scale: 4
-    t.decimal  "principal",                        precision: 8, scale: 2
-    t.decimal  "interest",                         precision: 8, scale: 2
-    t.decimal  "total",                            precision: 8, scale: 2
-    t.decimal  "original_apr",                     precision: 8, scale: 4
-    t.decimal  "original_interest",                precision: 8, scale: 2
-    t.date     "submission_date"
-    t.integer  "submission_timestamp", limit: 8
-    t.boolean  "approved",                                                 default: false
-    t.boolean  "disbursed",                                                default: false
-    t.boolean  "repaid",                                                   default: false
-    t.integer  "days",                 limit: 4
+    t.string   "uuid",           limit: 36
+    t.string   "user_id",        limit: 36
+    t.decimal  "apr",                        precision: 8, scale: 4
+    t.decimal  "principal",                  precision: 8, scale: 2
+    t.decimal  "interest",                   precision: 8, scale: 2
+    t.decimal  "total",                      precision: 8, scale: 2
+    t.boolean  "approved",                                           default: false
+    t.boolean  "disbursed",                                          default: false
+    t.boolean  "repaid",                                             default: false
+    t.integer  "days",           limit: 4
     t.date     "maturity_date"
-    t.string   "user_ip",              limit: 255
-    t.string   "decline_reason",       limit: 255
-    t.datetime "created_at",                                                               null: false
-    t.datetime "updated_at",                                                               null: false
+    t.string   "user_ip",        limit: 255
+    t.string   "decline_reason", limit: 255
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
     t.datetime "disburse_after"
   end
 
