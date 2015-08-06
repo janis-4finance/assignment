@@ -1,10 +1,10 @@
 - if @loan.approved
-	.notice.bg-success Aizņēmums apstiprināts
+	.notice.bg-success Loan approved
 	- if @loan.disbursed
-		.notice.bg-success Nauda ir tavā kontā :)
+		.notice.bg-success Money is in your bank account :)
 	-else
-		.notice.bg-info Skaitam naudu uz tavu kontu...
+		.notice.bg-info Transferring money...
 		= content_for :meta do
 			%meta{ "http-equiv" => "refresh", "content" => 30 }
 - else
-	.notice.bg-warning Aizņēmums noraidīts :(
+	.notice.bg-warning Loan declined :(

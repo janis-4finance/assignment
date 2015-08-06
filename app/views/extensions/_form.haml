@@ -1,5 +1,13 @@
 = form_for( [ @extension.loan, @extension ], :html => { :class => "loan_form new_extension", 'data-loan_id' => @extension.loan.uuid } ) do |f|
 	.extend
+		- if @extension.errors.any?
+			#error_explanation
+				%h2
+					= pluralize(@extension.errors.count, "error")
+					&nbsp;prohibited this extension from being saved:
+				%ul
+					- @extension.errors.full_messages.each do |message|
+						%li= message
 		.field
 			.label_wrap
 				= f.label :days, "Extend by:"
